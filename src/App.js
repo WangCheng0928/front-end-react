@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { addGun, removeGun, addGunAsync } from './index.redux'
 
 //状态state
-const mapStateToProps = status => {
+const mapStateToProps = state => {
   return {
-    num: status
+    num: state.counter
   }
 }
 const mapDispatchToProps = { addGun, removeGun, addGunAsync }
