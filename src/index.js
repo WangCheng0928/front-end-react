@@ -7,6 +7,7 @@ import { createStore, applyMiddleware } from 'redux'
 import Auth from './Auth'
 import Dashboard from './Dashboard'
 import reducers from './reducer'
+import './config'
 
 const store = createStore(reducers, applyMiddleware(thunk))
 
