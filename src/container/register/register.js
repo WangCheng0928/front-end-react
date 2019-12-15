@@ -10,6 +10,7 @@ import {
 } from 'antd-mobile'
 import { connect } from 'react-redux'
 import { register } from '../../redux/user.redux'
+import { Redirect } from 'react-router-dom'
 
 @connect(state => state.user, { register })
 class Register extends React.Component {
@@ -40,7 +41,9 @@ class Register extends React.Component {
     return (
       <div>
         <Logo></Logo>
-        <h2>注册页</h2>
+        {this.props.redirectTo ? (
+          <Redirect to={this.props.redirectTo}></Redirect>
+        ) : null}
         <WingBlank>
           <List>
             {this.props.msg ? (
