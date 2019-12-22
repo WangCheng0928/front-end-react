@@ -35,6 +35,7 @@ export function user(state = initState, action) {
     case LOAD_DATA:
       return {
         ...state,
+        isAuth: true,
         ...action.data
       }
     case ERROR_MSG:
@@ -57,7 +58,8 @@ function errorMsg(msg) {
 }
 
 export function loadData(userInfo) {
-  return { type: LOAD_DATA, data: userInfo }
+  console.log(userInfo.data)
+  return { type: LOAD_DATA, data: userInfo.data }
 }
 
 export function register({ user, pwd, repeatPwd, type }) {

@@ -22,7 +22,7 @@ Router.get('/info', function(req, res) {
       return res.json({ code: 1, msg: '后端出错了' })
     }
     if (d) {
-      return res.json({ code: 0, data: d.data })
+      return res.json({ code: 0, data: d })
     }
   })
 })

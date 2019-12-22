@@ -1,5 +1,4 @@
 const express = require('express')
-const utils = require('utility')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const userRouter = require('./user')
