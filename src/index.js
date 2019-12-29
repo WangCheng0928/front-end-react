@@ -13,6 +13,7 @@ import AutRoute from './component/authroute/AuthRoute'
 import './config'
 import './index.css'
 import BossInfo from './container/bossinfo/bossinfo'
+import GeniusInfo from './container/geniusinfo/geniusinfo'
 
 const logger = createLogger({ collapsed: true })
 const store = createStore(
@@ -28,6 +29,7 @@ ReactDom.render(
     <BrowserRouter>
       {/* <Switch> */}
       <AutRoute></AutRoute>
+      <Route path="/GeniusInfo" component={GeniusInfo}></Route>
       <Route path="/BossInfo" component={BossInfo}></Route>
       <Route path="/login" exact component={Login}></Route>
       <Route path="/register" component={Register}></Route>
