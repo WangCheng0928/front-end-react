@@ -14,6 +14,7 @@ import './config'
 import './index.css'
 import BossInfo from './container/bossinfo/bossinfo'
 import GeniusInfo from './container/geniusinfo/geniusinfo'
+import Dashboard from './component/dashboard/dashboard'
 
 const logger = createLogger({ collapsed: true })
 const store = createStore(
@@ -27,14 +28,15 @@ const store = createStore(
 ReactDom.render(
   <Provider store={store}>
     <BrowserRouter>
-      {/* <Switch> */}
       <AutRoute></AutRoute>
-      <Route path="/GeniusInfo" component={GeniusInfo}></Route>
-      <Route path="/BossInfo" component={BossInfo}></Route>
-      <Route path="/login" exact component={Login}></Route>
-      <Route path="/register" component={Register}></Route>
-      {/* <Redirect to="/login"></Redirect> */}
-      {/* </Switch> */}
+      <Switch>
+        <Route path="/GeniusInfo" component={GeniusInfo}></Route>
+        <Route path="/BossInfo" component={BossInfo}></Route>
+        <Route path="/login" exact component={Login}></Route>
+        <Route path="/register" component={Register}></Route>
+        <Route component={Dashboard}></Route>
+        {/* <Redirect to="/login"></Redirect> */}
+      </Switch>
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')
