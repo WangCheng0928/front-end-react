@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { NavBar } from 'antd-mobile'
 import { Switch, Route } from 'react-router-dom'
@@ -15,7 +15,7 @@ function Msg() {
 class Dashboard extends React.Component {
   render() {
     const user = this.props.user
-    const pathname = this.props.location.pathname
+    const { pathname } = this.props.location
     const navList = [
       {
         path: '/boss',
@@ -50,7 +50,7 @@ class Dashboard extends React.Component {
     ]
     return (
       <div>
-        <NavBar className="fixed-header" mode="dash">
+        <NavBar className="fixed-header" mode="dard">
           {(navList.find(v => v.path === pathname) &&
             navList.find(v => v.path === pathname).title) ||
             ''}
