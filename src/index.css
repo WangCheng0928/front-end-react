@@ -1,12 +1,14 @@
 .error-msg {
   color: #f50;
   padding-left: 10px;
+  padding-top: 10px;
 }
 
 .am-tab-bar {
   position: fixed;
   bottom: 0;
   width: 100%;
+  z-index: -1; /*TabBar挡住了，所以点击无效*/
 }
 
 .fix-header.am-navbar {
@@ -17,4 +19,20 @@
 
 .page-content {
   padding: 45px 5px;
+}
+
+#chat-page .chat-me .am-list-extra {
+  flex-basis: auto;
+}
+
+#chat-page .chat-me .am-list-content {
+  padding-right: 15px;
+  text-align: right;
+}
+
+.stick-footer {
+  z-index: 10;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
