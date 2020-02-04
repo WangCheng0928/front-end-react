@@ -14,6 +14,7 @@ import './index.css'
 import BossInfo from './container/bossinfo/bossinfo'
 import GeniusInfo from './container/geniusinfo/geniusinfo'
 import Dashboard from './component/dashboard/dashboard'
+import Chat from './component/chat/chat'
 
 const logger = createLogger({ collapsed: true })
 const store = createStore(
@@ -33,6 +34,7 @@ ReactDom.render(
         <Route path="/BossInfo" component={BossInfo}></Route>
         <Route path="/login" exact component={Login}></Route>
         <Route path="/register" component={Register}></Route>
+        <Route path="/chat/:user" component={Chat}></Route>
         <Route component={Dashboard}></Route>
         {/* <Redirect to="/login"></Redirect> */}
       </Switch>

@@ -3,7 +3,10 @@ const utils = require('utility')
 const Router = express.Router()
 const model = require('./model')
 const User = model.getModel('user')
+const Chat = model.getModel('chat')
 const _filter = { pwd: 0, _v: 0 }
+
+// Chat.remove({}, function(err, doc) {})
 
 Router.get('/list', function(req, res) {
   // User.remove({}, function(e, d) {})
@@ -12,6 +15,23 @@ Router.get('/list', function(req, res) {
     return res.json({ code: 0, data: doc })
   })
 })
+
+Router.get('/getMsgList', function(req, res) {
+  const userId = req.cookies.userId
+  User.find({}, function(err, doc) {
+    let users = {}
+    doc.forEach(v => {
+      users[v._id] = { name: v.user, avatar: v.avatar }
+    })
+    // $or: [{ from: user, to: user }]
+    Chat.find({ $or: [{ from: userId }, { to: userId }] }, function(err, doc) {
+      if (!err) {
+        return res.json({ code: 0, msgs: doc, users: users })
+      }
+    })
+  })
+})
+
 Router.get('/info', function(req, res) {
   //用户有没有cookie
   const { userId } = req.cookies

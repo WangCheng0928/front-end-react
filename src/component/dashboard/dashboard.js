@@ -6,13 +6,18 @@ import NavLinkBar from '../navlink/navlink'
 import Boss from '../../container/boss/boss'
 import Genius from '../../container/genius/genius'
 import UserInfo from '../../container/userinfo/userinfo'
+import Msg from '../../container/msg/msg'
+import { getMsgList, receiveMsg } from '../../redux/chat.redux'
 
-function Msg() {
-  return <h2>消息首页</h2>
-}
-
-@connect(state => state)
+@connect(state => state, { getMsgList, receiveMsg })
 class Dashboard extends React.Component {
+  componentDidMount() {
+    if (!this.props.chat.chatmsg.length) {
+      this.props.getMsgList()
+      this.props.receiveMsg()
+    }
+  }
+
   render() {
     const user = this.props.user
     const { pathname } = this.props.location
@@ -55,7 +60,7 @@ class Dashboard extends React.Component {
             navList.find(v => v.path === pathname).title) ||
             ''}
         </NavBar>
-        <div style={{ marginTop: 45 }}>
+        <div>
           <Switch>
             {navList.map(v => (
               <Route key={v.path} path={v.path} component={v.component}></Route>
