@@ -48,6 +48,22 @@ Router.get('/info', function(req, res) {
   })
 })
 
+Router.post('/readMsg', function(req, res) {
+  const userId = req.cookies.userId
+  const { from } = req.body
+  console.log(userId, from)
+  Chat.updateMany({ from, to: userId }, { $set: { read: true } }, function(
+    err,
+    doc
+  ) {
+    console.log(doc)
+    if (!err) {
+      return res.json({ code: 0, num: doc.nModified })
+    }
+    return res.json({ code: 1, msg: '修改失败' })
+  })
+})
+
 Router.post('/update', function(req, res) {
   console.log(req.body)
   const userId = req.cookies.userId

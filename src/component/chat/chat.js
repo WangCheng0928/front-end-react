@@ -2,12 +2,17 @@ import React from 'react'
 import io from 'socket.io-client'
 import { List, InputItem, NavBar, Icon, Grid } from 'antd-mobile'
 import { connect, useStore } from 'react-redux'
-import { getMsgList, sendMsg, receiveMsg } from '../../redux/chat.redux'
+import {
+  getMsgList,
+  sendMsg,
+  receiveMsg,
+  readMsg
+} from '../../redux/chat.redux'
 import { getChatId } from '../../utils'
 
 const socket = io('ws://localhost:9093')
 
-@connect(state => state, { getMsgList, sendMsg, receiveMsg })
+@connect(state => state, { getMsgList, sendMsg, receiveMsg, readMsg })
 class Chat extends React.Component {
   constructor(props) {
     super(props)
@@ -37,6 +42,11 @@ class Chat extends React.Component {
     //   //用箭头函数可以避免this.state.msg找不到的问题
     //   this.setState({ msg: [...this.state.msg, data.text] })
     // })
+  }
+
+  componentWillUnmount() {
+    const to = this.props.match.params.user
+    this.props.readMsg(to)
   }
 
   fixCarousel() {
