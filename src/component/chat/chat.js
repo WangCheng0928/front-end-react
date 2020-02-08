@@ -1,7 +1,6 @@
 import React from 'react'
-import io from 'socket.io-client'
 import { List, InputItem, NavBar, Icon, Grid } from 'antd-mobile'
-import { connect, useStore } from 'react-redux'
+import { connect } from 'react-redux'
 import {
   getMsgList,
   sendMsg,
@@ -9,8 +8,7 @@ import {
   readMsg
 } from '../../redux/chat.redux'
 import { getChatId } from '../../utils'
-
-const socket = io('ws://localhost:9093')
+import QueueAnim from 'rc-queue-anim'
 
 @connect(state => state, { getMsgList, sendMsg, receiveMsg, readMsg })
 class Chat extends React.Component {
@@ -80,20 +78,25 @@ class Chat extends React.Component {
         >
           {users[userid].name}
         </NavBar>
-        {chatmsgs.map(v => {
-          const avatar = require(`../img/${users[v.from].avatar}.png`)
-          return v.from === userid ? (
-            <List key={v._id}>
-              <Item thumb={avatar}>{v.content}</Item>
-            </List>
-          ) : (
-            <List key={v._id}>
-              <Item className="chat-me" extra={<img src={avatar}></img>}>
-                {v.content}
-              </Item>
-            </List>
-          )
-        })}
+        <QueueAnim type="left" delay={100}>
+          {chatmsgs.map(v => {
+            const avatar = require(`../img/${users[v.from].avatar}.png`)
+            return v.from === userid ? (
+              <List key={v._id}>
+                <Item thumb={avatar}>{v.content}</Item>
+              </List>
+            ) : (
+              <List key={v._id}>
+                <Item
+                  className="chat-me"
+                  extra={<img src={avatar} alt="头像"></img>}
+                >
+                  {v.content}
+                </Item>
+              </List>
+            )
+          })}
+        </QueueAnim>
         <div className="stick-footer">
           <List>
             <InputItem

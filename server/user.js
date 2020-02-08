@@ -51,7 +51,6 @@ Router.get('/info', function(req, res) {
 Router.post('/readMsg', function(req, res) {
   const userId = req.cookies.userId
   const { from } = req.body
-  console.log(userId, from)
   Chat.updateMany({ from, to: userId }, { $set: { read: true } }, function(
     err,
     doc
@@ -65,7 +64,6 @@ Router.post('/readMsg', function(req, res) {
 })
 
 Router.post('/update', function(req, res) {
-  console.log(req.body)
   const userId = req.cookies.userId
   if (!userId) {
     return res.json({ code: 1 })
